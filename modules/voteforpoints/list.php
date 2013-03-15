@@ -1,0 +1,31 @@
+<?php if (!defined('FLUX_ROOT')) exit;
+
+$this->loginRequired();
+$vfp_sites		= Flux::config('FluxTables.vfp_sites');
+$vfp_logs		= Flux::config('FluxTables.vfp_logs');
+
+// delete voting site
+if (isset($_POST['id']))
+{
+	$id = (int) $params->get('id');
+
+	$sql = "DELETE FROM $server->loginDatabase.$vfp_sites WHERE id = ? UNION
+			DELETE FROM $server->loginDAtabase.$vfp_logs WHERE sites_id = ?";
+	$sth = $server->connection->getStatement($sql);
+	$sth->execute(array($id, $id));
+
+	if ($sth->rowCount() === 0)
+	{
+		$errorMessage = Flux::message("VoteSiteDeleteFailed");
+	} else {
+		$successMessage = Flux::message("VoteSiteDeleteSuccess");
+	}
+}
+
+// fetch all voting sites
+$sql = "SELECT * FROM $server->loginDatabase.$vfp_sites";
+$sth = $server->connection->getStatement($sql);
+$sth->execute();
+$votesites_res = $sth->fetchAll();
+
+?>
