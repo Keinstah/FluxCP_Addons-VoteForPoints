@@ -19,9 +19,7 @@ Rules:
 If you find a bug, please contact me.
 
 Github: http://github.com/Feefty
-
 Email: kingfeefty@gmail.com
-
 rAthena: Feefty
 
 Feel free to buy me a coffee
