@@ -19,6 +19,7 @@ Rules:
 How to Install:
 - Create voteforpoints folder in your addons folder.
 - Extract all the files in voteforpoints folder.
+- Import the sql files from schemas/logindb folder.
 - Done.
 
 If you find a bug, please contact me.
