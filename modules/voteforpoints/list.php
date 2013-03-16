@@ -3,7 +3,7 @@
 $this->loginRequired();
 $vfp_sites		= Flux::config('FluxTables.vfp_sites');
 $vfp_logs		= Flux::config('FluxTables.vfp_logs');
-$errorMessage	=
+$errorMessage	= NULL;
 
 // delete voting site
 if (isset($_POST['id']))
