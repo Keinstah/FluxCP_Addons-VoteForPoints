@@ -16,6 +16,11 @@ Compability:
 Rules:
 - Do not steal the credit of this work.
 
+How to Install:
+- Create voteforpoints folder in your addons folder.
+- Extract all the files in voteforpoints folder.
+- Done.
+
 If you find a bug, please contact me.
 
 Github: http://github.com/Feefty  
