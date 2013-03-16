@@ -41,7 +41,6 @@ return array(
 	"FailedToUpdate"	=> "Failed to update the value of %s.",
 	"VotingSiteUpdated"	=> "Voting Site has been updated.",
 	"NoChangesMade" 	=> "No changes has been made to the voting site.",
-	"NoVotingSiteYet"	=> "You haven't submitted any voting site yet.",
 );
 
 ?>

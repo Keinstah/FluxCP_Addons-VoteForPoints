@@ -5,9 +5,6 @@
 <?php elseif (!empty($successMessage)): ?>
 	<p class="green"><?php echo htmlspecialchars($successMessage) ?></p>
 <?php endif ?>
-<?php if (count($votesites_res) === 0): ?>
-	<p class='message'><?= Flux::message('NoVotingSiteYet') ?></p>
-<?php else: ?>
 <form action="<?php echo $this->urlWithQs ?>" method="post" class="generic-form">
 	<table class="horizontal-table vote-table">
 		<tr>
@@ -25,7 +22,7 @@
 			<td style="text-align:center"><?= number_format($row->votepoints) ?></td>
 			<td style="text-align:center"><?php echo $row->voteinterval." ".((int) $row->voteinterval > 1 ? "Hours" : "Hour") ?></td>
 			<td style="text-align:center"><?= date(Flux::config("DateFormat"), strtotime($row->datetime_created)) ?></td>
-			<td style="text-align:center"><button type="submit" name="id" value="<?= (int) $row->id ?>" onclick="if(!confirm('Are you sure about this?')) return false;">Delete</button> | <button type='button' onclick="window.open('<?php echo $this->url('voteforpoints', 'edit').(Flux::config('UseCleanUrls') ? "?id=".$row->id : "&id=".$row->id) ?>');">Edit</button></td>
+			<td style="text-align:center"><button type="submit" name="id" value="<?= (int) $row->id ?>">Delete</button> | <button type='button' onclick="window.open('<?php echo $this->url('voteforpoints', 'edit').(Flux::config('UseCleanUrls') ? "?id=".$row->id : "&id=".$row->id) ?>');">Edit</button></td>
 		</tr>
 		<?php endforeach ?>
 	</table>
@@ -44,4 +41,3 @@
 		});
 	});
 </script>
-<?php endif ?>
