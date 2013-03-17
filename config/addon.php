@@ -1,6 +1,6 @@
 <?php if (!defined('FLUX_ROOT')) exit;
 return array(		
-	'UseCreditsForPoints'	=> true,
+	'PointsType'			=> "cash", // credit, vote, cash
 	'DefaultIntervalVoting' => 12,
 	'DefaultVotePoints' 	=> 1,
 	'VoteNameMax'			=> 15,

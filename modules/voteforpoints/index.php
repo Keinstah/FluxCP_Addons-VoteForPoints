@@ -83,37 +83,62 @@ if (isset($_POST['id']))
 						$errorMessage = sprintf(Flux::message("UnableToVote"), 2);
 					} else {
 
-						// don't use the credits for vote points
-						if (!Flux::config('UseCreditsForPoints'))
+						switch (Flux::config('PointsType'))
 						{
-							// update votepoints
-							$sql = "UPDATE $server->loginDatabase.cp_createlog SET votepoints = votepoints + ? WHERE account_id = ?";
-							$sth = $server->connection->getStatement($sql);
-							$sth->execute(array((int) $res->votepoints, $account_id));
-
-							if ($sth->rowCount() === 0)
-							{
-								$errorMessage = sprintf(Flux::message("UnableToVote"), 3);
-							}
-						} else {
-
-							// update credits row
-							$sql = "UPDATE $server->loginDatabase.cp_credits SET balance = balance + ? WHERE account_id = ?";
-							$sth = $server->connection->getStatement($sql);
-							$sth->execute(array((int) $res->votepoints, $account_id));
-
-							if ($sth->rowCount() === 0)
-							{
-								// insert new credits row
-								$sql = "INSERT INTO $server->loginDatabase.cp_credits VALUES (?, ?, NULL, NULL)";
+							case "vote":
+								// update votepoints
+								$sql = "UPDATE $server->loginDatabase.cp_createlog SET votepoints = votepoints + ? WHERE account_id = ?";
 								$sth = $server->connection->getStatement($sql);
-								$sth->execute(array($account, $res->votepoints));
+								$sth->execute(array((int) $res->votepoints, $account_id));
 
 								if ($sth->rowCount() === 0)
 								{
-									$errorMessage = sprintf(Flux::message("UnableToVote"), 4);
+									$errorMessage = sprintf(Flux::message("UnableToVote"), 3);
 								}
-							}
+							break;
+
+							case "cash":
+								// insert or update cashpoints
+								$cashpoints_var = "#CASHPOINTS";
+								$sql = "UPDATE global_reg_value SET value = value + ? WHERE str = ? AND account_id = ?";
+								$sth = $server->connection->getStatement($sql);
+								$sth->execute(array((int) $res->votepoints, $cashpoints_var, $account_id));
+
+								// account doesn't have a record for cashpoints
+								// so we will add a row
+								if ($sth->rowCount() === 0)
+								{
+									$sql = "INSERT INTO global_reg_value VALUES (0, ?, ?, 2, ?)";
+									$sth = $server->connection->getStatement($sql);
+									$bind = array($cashpoints_var, $res->votepoints, $account_id);
+									$sth->execute($bind);
+
+									if ($sth->rowCount() === 0)
+									{
+										$errorMessage = sprintf(Flux::message("UnableToVote"), 4);
+									}
+								}
+							break;
+
+							default:
+								// update credits row
+								$sql = "UPDATE $server->loginDatabase.cp_credits SET balance = balance + ? WHERE account_id = ?";
+								$sth = $server->connection->getStatement($sql);
+								$sth->execute(array((int) $res->votepoints, $account_id));
+
+								if ($sth->rowCount() === 0)
+								{
+									// insert new credits row
+									$sql = "INSERT INTO $server->loginDatabase.cp_credits VALUES (?, ?, NULL, NULL)";
+									$sth = $server->connection->getStatement($sql);
+									$sth->execute(array($account, $res->votepoints));
+
+									if ($sth->rowCount() === 0)
+									{
+										$errorMessage = sprintf(Flux::message("UnableToVote"), 6);
+									}
+								}
+							break;
 						}
 					}
 				}
