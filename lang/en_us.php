@@ -42,6 +42,8 @@ return array(
 	"VotingSiteUpdated"	=> "Voting Site has been updated.",
 	"NoChangesMade" 	=> "No changes has been made to the voting site.",
 	"NoVotingSiteYet"	=> "You haven't submitted any voting site yet.",
+	"NoVotingSiteYet2"	=> "This page doesn't have a voting site yet.",
+	"VoteNotice"		=> "Please vote to make the server grow.",
 );
 
 ?>

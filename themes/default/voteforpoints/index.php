@@ -1,10 +1,12 @@
 <?php if (!defined('FLUX_ROOT')) exit; ?>
 <h2><?php echo htmlspecialchars(sprintf(Flux::message('VoteHeading'), $server->serverName)) ?></h2>
+<p class='message'><?= htmlspecialchars(Flux::message("VoteNotice")) ?></p>
 <?php if (!empty($errorMessage)): ?>
 	<p class="red"><?php echo htmlspecialchars($errorMessage) ?></p>
 <?php elseif (!empty($successMessage)): ?>
 	<p class="green"><?php echo htmlspecialchars($successMessage) ?></p>
 <?php endif ?>
+<?php if (count($votesites_res) !== 0): ?>
 <form action="<?php echo $this->urlWithQs ?>" method="post" class="generic-form">
 	<table class="horizontal-table vote-table">
 		<tr>
@@ -41,3 +43,6 @@
 		});
 	});
 </script>
+<?php else: ?>
+	<p class='red'><?= htmlspecialchars(Flux::message("NoVotingSiteYet2")) ?></p>
+<?php endif ?>
