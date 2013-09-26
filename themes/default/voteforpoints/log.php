@@ -28,7 +28,7 @@
 			<tr>
 				<td><?php echo $row->id ?></td>
 				<td><?php echo $row->sites_id ?></td>
-				<td><?php echo $row->account_id ?></td>
+				<td><?php echo $this->linkToAccountSearch(array('id' => $row->account_id), $row->account_id) ?></td>
 				<td><?php echo $row->ipaddress ?></td>
 				<td><?php echo $row->timestamp_voted ?></td>
 				<td><button name='delete' onclick="return confirm('Are you sure about this?')" value='<?php echo (int) $row->id ?>'>Delete</button></td>
