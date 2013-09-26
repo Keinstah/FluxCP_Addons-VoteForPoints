@@ -11,7 +11,7 @@ Features:
 - Vote Name to avoid the confusion of the voting site.
 - Able to detect if the user is using proxy.
 - Able to check if the user has already voted by its ip address.
-- Voters Log(Able to delete a voters log.)
+- (new) Voters Log(Able to delete a voters log.)
 
 Compability:
 - Tested on Xantara's FluxCP for rAthena - https://github.com/m...ntara/fluxcp-rA
@@ -27,7 +27,7 @@ How to Install:
 - Done.
 
 Required:
-- PHP 5.4+
+- PHP 5.2+
 - MySql
 
 If you find a bug, please contact me.
