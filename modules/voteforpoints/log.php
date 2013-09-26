@@ -14,10 +14,7 @@ if (isset($_POST['delete']))
 	$sth = $server->connection->getStatement("DELETE FROM $vfp_logs WHERE id = ?");
 	$sth->execute(array($id));
 
-	if ($sth->rowCount())
-		$successMessage = Flux::message('VotersLogDeleted');
-	else
-		$errorMessage = Flux::message('VotersLogDeleteFail');
+	$successMessage = Flux::message('VotersLogDeleted');
 }
 
 if (isset($_POST['delete_all']))
