@@ -13,12 +13,10 @@ if (!function_exists("isChanged"))
 		$bind = array($row, (int) $id);
 		$sth->execute($bind);
 
-		if ($sth->rowCount() > 0)
-		{
+		if ($sth->rowCount())
 			return FALSE;
-		} else {
+		else
 			return TRUE;
-		}
 	}
 }
 
@@ -33,12 +31,10 @@ if (!function_exists("updateValue"))
 		$bind = array($row, (int) $id);
 		$sth->execute($bind);
 
-		if ($sth->rowCount() > 0)
-		{
+		if ($sth->rowCount())
 			return TRUE;
-		} else {
+		else
 			return FALSE;
-		}
 	}
 }
 
@@ -58,7 +54,8 @@ if (!function_exists("isVoted"))
 			$bind = array($ipaddress, $vote_id, time());
 			$sth->execute($bind);
 			
-			if ($sth->rowCount() === 1) return $sth->fetch()->timestamp_expire;
+			if ($sth->rowCount())
+				return $sth->fetch()->timestamp_expire;
 		}
 
 		$sql = "SELECT timestamp_expire FROM $server->loginDatabase.$vfp_logs WHERE account_id = ? AND sites_id = ? AND UNIX_TIMESTAMP(timestamp_expire) > ? LIMIT 1";
@@ -66,9 +63,22 @@ if (!function_exists("isVoted"))
 		$bind = array($account_id, $vote_id, time());
 		$sth->execute($bind);
 
-		if ($sth->rowCount() === 1) return $sth->fetch()->timestamp_expire;
+		if ($sth->rowCount()) 
+			return $sth->fetch()->timestamp_expire;
+		else
+			return FALSE;
+	}
+}
 
-		return FALSE;
+if (!function_exists("getCashPoints"))
+{
+	function getCashPoints($account_id, $server)
+	{
+		$sql = "SELECT value FROM global_reg_value WHERE account_id = ?";
+		$sth = $server->connection->getStatement($sql);
+		$sth->execute(array((int) $account_id));
+
+		return (int) $sth->fetch()->value;
 	}
 }
 
@@ -76,7 +86,8 @@ if (!function_exists("getTimeLeft"))
 {
 	function getTimeLeft($ts)
 	{
-		if (strtotime($ts) < time()) return FALSE;
+		if (strtotime($ts) < time())
+			return FALSE;
 
 		$time = strtotime($ts) - time();
 
@@ -98,19 +109,15 @@ if (!function_exists("getTimeLeft"))
 		$seconds = floor($temp);
 
 		if ($days > 0)
-		{
 			return $days.($days > 1 ? " days left" : " day left");
-		} else
+		else
 		if ($hours > 0)
-		{
 			return $hours.($hours > 1 ? " hours left" : " hour left");
-		} else
+		else
 		if ($minutes > 0)
-		{
 			return $minutes.($minutes > 1 ? " minutes left" : " minute left");
-		} else {
+		else
 			return $seconds.($seconds > 1 ? " seconds left" : " second left");
-		}
 	}
 }
 

@@ -14,19 +14,16 @@ if (isset($_POST['id']))
 	$sth = $server->connection->getStatement($sql);
 	$sth->execute(array($id));
 
-	if ($sth->rowCount() === 0)
-	{
+	if ( ! $sth->rowCount())
 		$errorMessage = Flux::message("VoteSiteDeleteFailed");
-	}
+	
 
 	$sql = "DELETE FROM $server->loginDatabase.$vfp_logs WHERE sites_id = ?";
 	$sth = $server->connection->getStatement($sql);
 	$sth->execute(array($id));
 
 	if (is_null($errorMessage))
-	{
 		$successMessage = Flux::message("VoteSiteDeleteSuccess");
-	}
 }
 
 // fetch all voting sites

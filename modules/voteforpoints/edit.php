@@ -30,31 +30,22 @@ if (isset($_POST['votename']))
 		$sth->execute(array($votename));
 
 		// votename is already exists
-		if ($sth->rowCount() === 1)
-		{
+		if ($sth->rowCount())
 			$errorMessage = Flux::message("VoteNameExists");
-		} else
-
+		else
 		// look for alphanumeric, underscore and white space characters
 		if (!preg_match(Flux::config('AlphaNumSpaceRegex'), $votename))
-		{
 			$errorMessage = Flux::message("InvalidVoteNameFormat");
-		} else
-
+		else
 		// votename has an invalid length
 		if (strlen($votename) > Flux::config('VoteNameMax') && strlen($votename) < Flux::config('VoteNameMin'))
-		{
 			$errorMessage = sprintf(Flux::message("InvalidVoteNameLength"), Flux::config('VoteNameMin'), Flux::config('VoteNameMax'));
-		} else
-
+		else
 		// failed to update the value
 		if (!updateValue($voteid, "votename", $votename, $server))
-		{
 			$errorMessage = sprintf(Flux::message("FailedToUpdate"), "Vote Name");
-		} else {
-
+		else
 			$hasUpdate = TRUE;
-		}
 	}
 
 	// voteurl value has changed
@@ -65,25 +56,18 @@ if (isset($_POST['votename']))
 		$sth->execute(array($voteurl));
 
 		// voteurl is already exists
-		if ($sth->rowCount() === 1)
-		{
+		if ($sth->rowCount())
 			$errorMessage = Flux::message("VoteUrlExists");
-		} else
-
+		else
 		// voteurl is not a valid url
 		if (!filter_var($voteurl, FILTER_VALIDATE_URL))
-		{
 			$errorMessage = sprintf(Flux::message("InvalidURL"), 'Vote URL');
-		} else
-
+		else
 		// failed to update the value
 		if (!updateValue($voteid, "voteurl", $voteurl, $server))
-		{
 			$errorMessage = sprintf(Flux::message("FailedToUpdate"), "Vote URL");
-		} else {
-
+		else
 			$hasUpdate = TRUE;
-		}
 	}
 
 	// voteinterval value has changed
@@ -91,18 +75,13 @@ if (isset($_POST['votename']))
 	{
 		// voteinterval is invalid
 		if ($voteinterval < Flux::config('VoteIntervalMin') && $voteinterval > Flux::config('VoteIntervalMax'))
-		{
 			$errorMessage = sprintf(Flux::message("InvalidVoteInterval"), Flux::config('VoteIntervalMin'), Flux::config('VoteIntervalMax'));
-		} else
-
+		else
 		// failed to update the value
 		if (!updateValue($voteid, "voteinterval", $voteinterval, $server))
-		{
 			$errorMessage = sprintf(Flux::message("FailedToUpdate"), "Voting Interval");
-		} else {
-
+		else
 			$hasUpdate = TRUE;
-		}
 	}
 
 	// votepoints value has changed
@@ -110,18 +89,13 @@ if (isset($_POST['votename']))
 	{
 		// votepoints is invalid
 		if ($votepoints < Flux::config('VotePointsMin') && $votepoints > Flux::config('votePointsMax'))
-		{
 			$errorMessage = sprintf(Flux::message("InvalidVotePoints"), Flux::config('VotePointsMin'), Flux::config('VotePointsMax'));
-		} else
-
+		else
 		// failed to update the value
 		if (!updateValue($voteid, "votepoints", $votepoints, $server))
-		{
 			$errorMessage = sprintf(Flux::message("FailedToUpdate"), "Vote Points");
-		} else {
-
+		else
 			$hasUpdate = TRUE;
-		}
 	}
 
 	// imageurl value has changed
@@ -129,18 +103,13 @@ if (isset($_POST['votename']))
 	{
 		// imageurl is not a valid url
 		if (!filter_var($imageurl, FILTER_VALIDATE_URL))
-		{
 			$errorMessage = sprintf(Flux::message("InvalidURL"), 'Image URL');
-		} else
-
+		else
 		// failed to update the value
 		if (!updateValue($voteid, "imgurl", $imageurl, $server))
-		{
 			$errorMessage = sprintf(Flux::message("FailedToUpdate"), "Image URL");
-		} else {
-
+		else
 			$hasUpdate = TRUE;
-		}
 	}
 
 	// updating imagename
@@ -153,50 +122,37 @@ if (isset($_POST['votename']))
 		if (!preg_match("/image\//", $uploadimg['type']) && 
 			!in_array(str_replace("image/", "", $uploadimg['type']), $imgtypes) &&
 			!in_array($ext, $imgtypes))
-		{
 			$errorMessage = Flux::message("InvalidImageType");
-		} else
-
+		else
 		// invalid file size
 		if ($uploadimg['size'] > Flux::config('MaxFileSize')*1024)
-		{
 			$errorMessage = sprintf(Flux::message("InvalidFileSize"), Flux::config('MaxFileSize'));
-		} else
-
+		else
 		// invalid image
 		if (!$size = getimagesize($uploadimg['tmp_name']))
-		{
 			$errorMessage = Flux::message("InvalidImageType");
-		} else
-
+		else
 		// invalid image size
 		if ($size[0] > Flux::config('ImageMaxWidth') || $size[1] > Flux::config('ImageMaxHeight'))
-		{
 			$errorMessage = sprintf(Flux::message("InvalidImageSize"), Flux::config('ImageMaxWidth'), Flux::config('ImageMaxHeight'));
-		} else 
+		else
 		{
 			$filename = time()."_".md5(time().$server->serverName).".".$ext;
 			$filepath = FLUX_THEME_DIR.'/'.Flux::config('ThemeName').'/img/'.Flux::config('ImageUploadPath').'/';
 			
 			// failed to upload the image
 			if (is_dir($filepath) && !move_uploaded_file($uploadimg['tmp_name'], $filepath.$filename))
-			{
 				$errorMessage = Flux::message("FailedToUpload");
-			} else {
-
+			else
 				$hasUpdate = TRUE;
-			}
 		}
 	}
 
 	if ($hasUpdate === TRUE)
-	{
 		$successMessage = Flux::message("VotingSiteUpdated");
-	}  else
+	else
 	if (is_null($errorMessage))
-	{
 		$errorMessage = Flux::message("NoChangesMade");
-	}
 }
 
 
@@ -206,12 +162,10 @@ if (isset($_GET['id']))
 	$sth = $server->connection->getStatement($sql);
 	$sth->execute(array($id));
 
-	if ($sth->rowCount() === 1)
-	{
+	if ($sth->rowCount())
 		$votesites_res = $sth->fetch();
-	} else {
+	else
 		$unavailable = TRUE;
-	}
 
 } else {
 	$unavailable = TRUE;

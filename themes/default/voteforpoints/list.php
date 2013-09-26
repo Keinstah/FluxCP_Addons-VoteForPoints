@@ -6,7 +6,7 @@
 	<p class="green"><?php echo htmlspecialchars($successMessage) ?></p>
 <?php endif ?>
 <?php if (count($votesites_res) === 0): ?>
-	<p class='message'><?= Flux::message('NoVotingSiteYet') ?></p>
+	<p class='message'><?php echo Flux::message('NoVotingSiteYet') ?></p>
 <?php else: ?>
 <form action="<?php echo $this->urlWithQs ?>" method="post" class="generic-form">
 	<table class="horizontal-table vote-table">
@@ -20,12 +20,12 @@
 		<?php foreach ($votesites_res as $row): ?>
 		<tr>
 			<td style="text-align:center">
-				<img title='<?= htmlspecialchars($row->votename) ?>' src="<?php echo (is_null($row->imgurl) ? $this->themePath('img/').Flux::config('ImageUploadPath').'/'.$row->imgname : $row->imgurl) ?>" />
+				<img title='<?php echo htmlspecialchars($row->votename) ?>' src="<?php echo (is_null($row->imgurl) ? $this->themePath('img/').Flux::config('ImageUploadPath').'/'.$row->imgname : $row->imgurl) ?>" />
 			</td>
-			<td style="text-align:center"><?= number_format($row->votepoints) ?></td>
+			<td style="text-align:center"><?php echo number_format($row->votepoints) ?></td>
 			<td style="text-align:center"><?php echo $row->voteinterval." ".((int) $row->voteinterval > 1 ? "Hours" : "Hour") ?></td>
-			<td style="text-align:center"><?= date(Flux::config("DateFormat"), strtotime($row->datetime_created)) ?></td>
-			<td style="text-align:center"><button type="submit" name="id" value="<?= (int) $row->id ?>" onclick="if(!confirm('Are you sure about this?')) return false;">Delete</button> | <button type='button' onclick="window.open('<?php echo $this->url('voteforpoints', 'edit').(Flux::config('UseCleanUrls') ? "?id=".$row->id : "&id=".$row->id) ?>');">Edit</button></td>
+			<td style="text-align:center"><?php echo date(Flux::config("DateFormat"), strtotime($row->datetime_created)) ?></td>
+			<td style="text-align:center"><button type="submit" name="id" value="<?php echo (int) $row->id ?>" onclick="if(!confirm('Are you sure about this?')) return false;">Delete</button> | <button type='button' onclick="window.open('<?php echo $this->url('voteforpoints', 'edit').(Flux::config('UseCleanUrls') ? "?id=".$row->id : "&id=".$row->id) ?>');">Edit</button></td>
 		</tr>
 		<?php endforeach ?>
 	</table>
@@ -37,7 +37,7 @@
 			var vote_sites = new Array();
 
 			<?php foreach ($votesites_res as $row): ?>
-				vote_sites[<?= $row->id ?>] = "<?= htmlspecialchars($row->voteurl) ?>";
+				vote_sites[<?php echo $row->id ?>] = "<?php echo htmlspecialchars($row->voteurl) ?>";
 			<?php endforeach ?>
 
 			window.open(vote_sites[id]);

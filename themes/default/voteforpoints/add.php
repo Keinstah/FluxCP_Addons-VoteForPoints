@@ -9,11 +9,11 @@
 	<table class="generic-form-table">
 		<tr>
 			<th><label for="votename"><?php echo htmlspecialchars(Flux::message('VoteNameLabel')) ?></label></th>
-			<td><input type="text" name="votename" id="votename" value="<?= htmlspecialchars($params->get('votename')) ?>" /></td>
+			<td><input type="text" name="votename" id="votename" value="<?php echo htmlspecialchars($params->get('votename')) ?>" /></td>
 		</tr>
 		<tr>
 			<th><label for="voteurl"><?php echo htmlspecialchars(Flux::message('VoteUrlLabel')) ?></label></th>
-			<td><input type="text" name="voteurl" id="voteurl" value="<?= htmlspecialchars($params->get('voteurl')) ?>" /> <span><?php echo htmlspecialchars(Flux::message('VoteUrlNote')) ?></span></td>
+			<td><input type="text" name="voteurl" id="voteurl" value="<?php echo htmlspecialchars($params->get('voteurl')) ?>" /> <span><?php echo htmlspecialchars(Flux::message('VoteUrlNote')) ?></span></td>
 		</tr>
 		<tr>
 			<th><label for="voteinterval"><?php echo htmlspecialchars(Flux::message('VoteIntervalLabel')) ?></label></th>
@@ -25,7 +25,7 @@
 		</tr>
 		<tr>
 			<th><label for="imageurl"><?php echo htmlspecialchars(Flux::message('ImageUrlLabel')) ?></label></th>
-			<td><input type="text" name="imageurl" placeholder="optional" id="imageurl" value="<?= htmlspecialchars($params->get('imageurl')) ?>" /> <span><?php echo htmlspecialchars(Flux::message('ImageUrlNote')) ?></span></td>
+			<td><input type="text" name="imageurl" placeholder="optional" id="imageurl" value="<?php echo htmlspecialchars($params->get('imageurl')) ?>" /> <span><?php echo htmlspecialchars(Flux::message('ImageUrlNote')) ?></span></td>
 		</tr>
 		<tr>
 			<th><label for="uploadimg"><?php echo htmlspecialchars(Flux::message('UploadImageLabel')) ?></label></th>

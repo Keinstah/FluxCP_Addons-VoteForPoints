@@ -30,6 +30,7 @@ return array(
 			'index' => 'Vote',
 			'add' => 'Add Voting Site',
 			'list' => 'List Voting Sites',
+			'log' => 'Voters Log',
 		)
 	),
 

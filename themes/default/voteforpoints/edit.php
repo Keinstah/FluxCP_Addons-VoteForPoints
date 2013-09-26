@@ -7,7 +7,7 @@
 <?php endif ?>
 <?php if (is_null($unavailable)): ?>
 <form action="<?php echo $this->urlWithQs ?>" method="post" class="generic-form">
-	<input type="hidden" name="voteid" value="<?= (int) $params->get('id') ?>" />
+	<input type="hidden" name="voteid" value="<?php (int) $params->get('id') ?>" />
 	<table class="generic-form-table">
 		<tr>
 			<th><label for="votename"><?php echo htmlspecialchars(Flux::message('VoteNameLabel')) ?></label></th>
@@ -31,7 +31,7 @@
 		</tr>
 		<tr>
 			<th><label for="uploadimg"><?php echo htmlspecialchars(Flux::message('UploadImageLabel')) ?></label></th>
-			<td><img title='<?= htmlspecialchars($votesites_res->votename) ?>' src="<?php echo (is_null($votesites_res->imgurl) ? $this->themePath('img/').Flux::config('ImageUploadPath').'/'.$votesites_res->imgname : $votesites_res->imgurl) ?>" /> <input type="file" name="uploadimg" id="uploadimg"> <span><?php echo htmlspecialchars(Flux::message('UploadImageNote')) ?></span></td>
+			<td><img title='<?php htmlspecialchars($votesites_res->votename) ?>' src="<?php echo (is_null($votesites_res->imgurl) ? $this->themePath('img/').Flux::config('ImageUploadPath').'/'.$votesites_res->imgname : $votesites_res->imgurl) ?>" /> <input type="file" name="uploadimg" id="uploadimg"> <span><?php echo htmlspecialchars(Flux::message('UploadImageNote')) ?></span></td>
 		</tr>
 		<tr>
 			<td></td>
@@ -42,5 +42,5 @@
 	</table>
 </form>
 <?php else: ?>
-<p class='red'><?= htmlspecialchars(Flux::message('EditVoteInvalidID')) ?></p>
+<p class='red'><?php htmlspecialchars(Flux::message('EditVoteInvalidID')) ?></p>
 <?php endif ?>

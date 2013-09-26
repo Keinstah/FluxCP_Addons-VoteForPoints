@@ -19,13 +19,15 @@ if (isset($_POST['id']))
 	$res = $sth->fetch();
 
 	// voting site doesn't exists
-	if ($sth->rowCount() === 0)
+	if ( ! $sth->rowCount())
 	{
 		$errorMessage = Flux::message("VoteDontExists");
 	} else
 
 	// voter is using invalid ip
-	if (!empty($_SERVER["HTTP_X_FORWARDED_FOR"]) || !empty($_SERVER['HTTP_CLIENT_IP']) || !empty($_SERVER['HTTP_X_FORWARDED']))
+	if (Flux::config('EnableIPVoteCheck') && !empty($_SERVER["HTTP_X_FORWARDED_FOR"]) || 
+		Flux::config('EnableIPVoteCheck') && !empty($_SERVER['HTTP_CLIENT_IP']) || 
+		Flux::config('EnableIPVoteCheck') && !empty($_SERVER['HTTP_X_FORWARDED']))
 	{
 		$errorMessage = sprintf(Flux::message("UnableToVote"), 1);
 	} else {
@@ -37,7 +39,8 @@ if (isset($_POST['id']))
 			$bind = array($ip, $id, time());
 			$sth->execute($bind);
 
-			if ($sth->rowCount() === 1) $errorMessage = Flux::message("AlreadyVoted");
+			if ($sth->rowCount())
+				$errorMessage = Flux::message("AlreadyVoted");
 		}
 
 		// validate for account_id
@@ -48,7 +51,7 @@ if (isset($_POST['id']))
 			$bind = array($account_id, $id, time());
 			$sth->execute($bind);
 
-			if ($sth->rowCount() === 1) 
+			if ($sth->rowCount()) 
 			{
 				$errorMessage = Flux::message("AlreadyVoted");
 			} else {
@@ -64,7 +67,7 @@ if (isset($_POST['id']))
 				);
 				$sth->execute($bind);
 
-				if ($sth->rowCount() === 0)
+				if ( ! $sth->rowCount())
 				{
 					// insert new row
 					$sql = "INSERT INTO $server->loginDatabase.$vfp_logs VALUES (NULL, ?, ?, ?, ?, ?)";
@@ -78,7 +81,7 @@ if (isset($_POST['id']))
 					);
 					$sth->execute($bind);
 
-					if ($sth->rowCount() === 0)
+					if ( ! $sth->rowCount())
 					{
 						$errorMessage = sprintf(Flux::message("UnableToVote"), 2);
 					} else {
@@ -91,10 +94,8 @@ if (isset($_POST['id']))
 								$sth = $server->connection->getStatement($sql);
 								$sth->execute(array((int) $res->votepoints, $account_id));
 
-								if ($sth->rowCount() === 0)
-								{
+								if ( ! $sth->rowCount())
 									$errorMessage = sprintf(Flux::message("UnableToVote"), 3);
-								}
 							break;
 
 							case "cash":
@@ -106,17 +107,15 @@ if (isset($_POST['id']))
 
 								// account doesn't have a record for cashpoints
 								// so we will add a row
-								if ($sth->rowCount() === 0)
+								if ( ! $sth->rowCount())
 								{
 									$sql = "INSERT INTO global_reg_value VALUES (0, ?, ?, 2, ?)";
 									$sth = $server->connection->getStatement($sql);
 									$bind = array($cashpoints_var, $res->votepoints, $account_id);
 									$sth->execute($bind);
 
-									if ($sth->rowCount() === 0)
-									{
+									if ( ! $sth->rowCount())
 										$errorMessage = sprintf(Flux::message("UnableToVote"), 4);
-									}
 								}
 							break;
 
@@ -126,17 +125,15 @@ if (isset($_POST['id']))
 								$sth = $server->connection->getStatement($sql);
 								$sth->execute(array((int) $res->votepoints, $account_id));
 
-								if ($sth->rowCount() === 0)
+								if ( ! $sth->rowCount())
 								{
 									// insert new credits row
 									$sql = "INSERT INTO $server->loginDatabase.cp_credits VALUES (?, ?, NULL, NULL)";
 									$sth = $server->connection->getStatement($sql);
 									$sth->execute(array($account, $res->votepoints));
 
-									if ($sth->rowCount() === 0)
-									{
+									if ( ! $sth->rowCount())
 										$errorMessage = sprintf(Flux::message("UnableToVote"), 6);
-									}
 								}
 							break;
 						}

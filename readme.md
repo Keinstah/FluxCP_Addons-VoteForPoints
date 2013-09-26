@@ -11,6 +11,7 @@ Features:
 - Vote Name to avoid the confusion of the voting site.
 - Able to detect if the user is using proxy.
 - Able to check if the user has already voted by its ip address.
+- Voters Log(Able to delete a voters log.)
 
 Compability:
 - Tested on Xantara's FluxCP for rAthena - https://github.com/m...ntara/fluxcp-rA
@@ -24,6 +25,10 @@ How to Install:
 - Import the sql files from schemas/logindb folder.
 - Create a folder named votes or whatever name you use in the configuration and the path must for the folder be in /themes/default/img/
 - Done.
+
+Required:
+- PHP 5.4+
+- MySql
 
 If you find a bug, please contact me.
 

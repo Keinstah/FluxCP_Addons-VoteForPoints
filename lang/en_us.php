@@ -3,6 +3,7 @@
 return array(
 	"VoteHeading"		=> "Vote for %s",
 	"AddVoteHeading"	=> "Add Voting Site for %s",
+	"VotersLogHeading"	=> "List of all voters.",
 	"VoteNameLabel"		=> "Vote Name",
 	"VoteUrlLabel"		=> "Vote URL",
 	"ImageUrlLabel"		=> "Image URL",
@@ -31,7 +32,7 @@ return array(
 	"VoteDontExists"	=> "Voting Site doesn't exists.",
 	"UnableToVote"		=> "Unable to vote for the server. Err no. %d",
 	"AlreadyVoted"		=> "You have already voted on this site.",
-	"VoteNow"			=> "Vote now",
+	"VoteNow"			=> "Ready to vote",
 	"VoteSiteDeleteSuccess" => "You have deleted the voting site.",
 	"VoteSiteDeleteFailed" => "Failed to delete the voting site.",
 	"ListVoteHeading"	=> "List of all voting site for %s.",
@@ -44,6 +45,12 @@ return array(
 	"NoVotingSiteYet"	=> "You haven't submitted any voting site yet.",
 	"NoVotingSiteYet2"	=> "This page doesn't have a voting site yet.",
 	"VoteNotice"		=> "Please vote to make the server grow.",
+	"CurrentCashPoints"	=> "Current Cash Points: <b>%d</b>",
+	"NoOneHasVotedYet"	=> "No one has voted yet.",
+	"VotersLogDeleted"	=> "You have deleted the voters log.",
+	"VotersLogDeleteFail" => "Failed to delete the voters log.",
+	"VotersLogAllDeleted" => "All voters log has been deleted.",
+	"VotersLogAllDeleteFail" => "Failed to delete all the voters log.",
 );
 
 ?>
