@@ -2,10 +2,10 @@
 return array(		
 	'PointsType'			=> "cash", // credit, vote, cash
 	'DefaultIntervalVoting' => 12,
-	'DefaultVotePoints' 	=> 1,
+	'DefaultVotePoints' 	=> 0,
 	'VoteNameMax'			=> 15,
 	'VoteNameMin' 			=> 6,
-	'VotePointsMin'			=> 1,
+	'VotePointsMin'			=> 0,
 	'VotePointsMax'			=> 999,
 	'VoteIntervalMin'		=> 1,
 	'VoteIntervalMax'		=> 24,

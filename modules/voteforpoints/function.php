@@ -78,7 +78,7 @@ if (!function_exists("getCashPoints"))
 		$sth = $server->connection->getStatement($sql);
 		$sth->execute(array((int) $account_id));
 
-		return (int) $sth->fetch()->value;
+		return $sth->rowCount() ? (int) $sth->fetch()->value : 0;
 	}
 }
 

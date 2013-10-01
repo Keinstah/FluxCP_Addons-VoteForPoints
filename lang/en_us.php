@@ -51,6 +51,7 @@ return array(
 	"VotersLogDeleteFail" => "Failed to delete the voters log.",
 	"VotersLogAllDeleted" => "All voters log has been deleted.",
 	"VotersLogAllDeleteFail" => "Failed to delete all the voters log.",
+	"CashPointsLabel"	=> "Cash Points",
 );
 
 ?>

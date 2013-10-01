@@ -20,7 +20,7 @@
 			<td><input type="number" name="voteinterval" id="voteinterval" value="<?php echo ((int)$params->get('voteinterval') === 0 ? Flux::config('DefaultIntervalVoting') : htmlspecialchars($params->get('voteinterval'))) ?>" /> <span><?php echo htmlspecialchars(Flux::message('VoteIntervalNote')) ?></span></td>
 		</tr>
 		<tr>
-			<th><label for="votepoints"><?php echo htmlspecialchars(Flux::message('VotePointsLabel')) ?></label></th>
+			<th><label for="votepoints">Reward <?php echo htmlspecialchars(Flux::message('VotePointsLabel').'/'.Flux::message('CashPointsLabel')) ?>/Amount</label></th>
 			<td><input type="number" name="votepoints" id="votepoints" value="<?php echo ((int)$params->get('votepoints') === 0 ? Flux::config('DefaultVotePoints') : htmlspecialchars($params->get('votepoints'))) ?>" /></td>
 		</tr>
 		<tr>

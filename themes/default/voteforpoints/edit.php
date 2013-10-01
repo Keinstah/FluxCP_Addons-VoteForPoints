@@ -7,7 +7,7 @@
 <?php endif ?>
 <?php if (is_null($unavailable)): ?>
 <form action="<?php echo $this->urlWithQs ?>" method="post" class="generic-form">
-	<input type="hidden" name="voteid" value="<?php (int) $params->get('id') ?>" />
+	<input type="hidden" name="voteid" value="<?php echo (int) $votesites_res->id ?>" />
 	<table class="generic-form-table">
 		<tr>
 			<th><label for="votename"><?php echo htmlspecialchars(Flux::message('VoteNameLabel')) ?></label></th>
@@ -22,7 +22,7 @@
 			<td><input type="number" name="voteinterval" id="voteinterval" value="<?php echo ($votesites_res->voteurl !== "" ? htmlspecialchars($votesites_res->voteinterval) : ($params->get('voteinterval') !== "" ? $params->get('voteinterval') : Flux::config('DefaultIntervalVoting'))) ?>" /> <span><?php echo htmlspecialchars(Flux::message('VoteIntervalNote')) ?></span></td>
 		</tr>
 		<tr>
-			<th><label for="votepoints"><?php echo htmlspecialchars(Flux::message('VotePointsLabel')) ?></label></th>
+			<th><label for="votepoints">Reward <?php echo htmlspecialchars(Flux::message('VotePointsLabel').'/'.Flux::message('CashPointsLabel')) ?></label></th>
 			<td><input type="number" name="votepoints" id="votepoints" value="<?php echo ($votesites_res->votepoints !== "" ? htmlspecialchars($votesites_res->votepoints) : ($params->get('votepoints') !== "" ? $params->get('votepoints') : Flux::config('DefaultVotePoints'))) ?>" /></td>
 		</tr>
 		<tr>
