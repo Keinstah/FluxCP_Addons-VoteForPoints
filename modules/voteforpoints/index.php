@@ -5,6 +5,7 @@ $this->loginRequired();
 require_once("function.php");
 $vfp_sites		= Flux::config('FluxTables.vfp_sites');
 $vfp_logs		= Flux::config('FluxTables.vfp_logs');
+$cp_tbl			= Flux::config('FluxTables.cashpoints');
 $errorMessage	= NULL;
 
 if (isset($_POST['id']))
@@ -101,7 +102,7 @@ if (isset($_POST['id']))
 							case "cash":
 								// insert or update cashpoints
 								$cashpoints_var = "#CASHPOINTS";
-								$sql = "UPDATE global_reg_value SET value = value + ? WHERE str = ? AND account_id = ?";
+								$sql = "UPDATE $cp_tbl SET value = value + ? WHERE key = ? AND account_id = ?";
 								$sth = $server->connection->getStatement($sql);
 								$sth->execute(array((int) $res->votepoints, $cashpoints_var, $account_id));
 
@@ -109,7 +110,7 @@ if (isset($_POST['id']))
 								// so we will add a row
 								if ( ! $sth->rowCount())
 								{
-									$sql = "INSERT INTO global_reg_value VALUES (0, ?, ?, 2, ?)";
+									$sql = "INSERT INTO $cp_tbl VALUES (0, ?, ?, 2, ?)";
 									$sth = $server->connection->getStatement($sql);
 									$bind = array($cashpoints_var, $res->votepoints, $account_id);
 									$sth->execute($bind);

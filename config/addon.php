@@ -37,6 +37,7 @@ return array(
 	'FluxTables'	=> array(
 		'vfp_logs' => 'cp_vfp_logs',
 		'vfp_sites' => 'cp_vfp_sites',
+		'cashpoints' => 'acc_reg_num_db'
 	)
 )
 ?>
