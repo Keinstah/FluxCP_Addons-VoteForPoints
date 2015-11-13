@@ -69,7 +69,6 @@ if (isset($_POST['votename']))
 	{
 		$ext = explode(".", $uploadimg['name']);
 		$ext = end($ext);
-
 		// invalid image type
 		if (!preg_match("/image\//", $uploadimg['type']) && 
 			!in_array(str_replace("image/", "", $uploadimg['type']), $imgtypes) &&
@@ -90,10 +89,13 @@ if (isset($_POST['votename']))
 		else 
 		{
 			$filename = time()."_".md5(time().$server->serverName).".".$ext;
-			$filepath = FLUX_THEME_DIR.'/'.Flux::config('ThemeName').'/img/'.Flux::config('ImageUploadPath').'/';
+			$filepath = FLUX_ROOT .'/'. FLUX_THEME_DIR.'/'. Flux::config('DefaultThemeName') .'/img/'. Flux::config('ImageUploadPath');
+		
+			if ( ! is_dir($filepath))
+				mkdir($filepath);
 			
 			// failed to upload the image
-			if (is_dir($filepath) && !move_uploaded_file($uploadimg['tmp_name'], $filepath.$filename))
+			if (!move_uploaded_file($uploadimg['tmp_name'], $filepath.'/'.$filename))
 				$errorMessage = Flux::message("FailedToUpload");
 		}
 	}

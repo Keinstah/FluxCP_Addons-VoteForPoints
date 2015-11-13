@@ -1,5 +1,6 @@
 <?php if (!defined('FLUX_ROOT')) exit;
 return array(		
+	'DefaultThemeName'		=> 'default',
 	'PointsType'			=> "cash", // credit, vote, cash
 	'DefaultIntervalVoting' => 12,
 	'DefaultVotePoints' 	=> 0,

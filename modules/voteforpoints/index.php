@@ -110,9 +110,9 @@ if (isset($_POST['id']))
 								// so we will add a row
 								if ( ! $sth->rowCount())
 								{
-									$sql = "INSERT INTO $cp_tbl VALUES (0, ?, ?, 2, ?)";
+									$sql = "INSERT INTO $cp_tbl (`account_id`, `key`, `index`, `value`) VALUES (?, ?, 0, ?)";
 									$sth = $server->connection->getStatement($sql);
-									$bind = array($cashpoints_var, $res->votepoints, $account_id);
+									$bind = array($account_id, $cashpoints_var, $res->votepoints);
 									$sth->execute($bind);
 
 									if ( ! $sth->rowCount())
