@@ -41,7 +41,7 @@
 			var vote_sites = new Array();
 
 			<?php foreach ($votesites_res as $row): ?>
-				vote_sites[<?php echo $row->id ?>] = "<?php echo htmlspecialchars($row->voteurl) ?>";
+				vote_sites[<?php echo $row->id ?>] = "<?php echo htmlspecialchars_decode($row->voteurl) ?>";
 			<?php endforeach ?>
 
 			window.open(vote_sites[id]);
