@@ -8,7 +8,7 @@ if (!function_exists("isChanged"))
 	{
 		$vfp_sites = Flux::config('FluxTables.vfp_sites');
 
-		$sql = "SELECT * FROM $server->loginDatabase.$vfp_sites WHERE $col = ? AND id = ?";
+		$sql = "SELECT * FROM `$server->loginDatabase.$vfp_sites` WHERE `$col` = ? AND `id` = ?";
 		$sth = $server->connection->getStatement($sql);
 		$bind = array($row, (int) $id);
 		$sth->execute($bind);
@@ -26,7 +26,7 @@ if (!function_exists("updateValue"))
 	{
 		$vfp_sites = Flux::config('FluxTables.vfp_sites');
 
-		$sql = "UPDATE $server->loginDatabase.$vfp_sites SET $col = ? WHERE id = ?";
+		$sql = "UPDATE `$server->loginDatabase.$vfp_sites` SET `$col` = ? WHERE `id` = ?";
 		$sth = $server->connection->getStatement($sql);
 		$bind = array($row, (int) $id);
 		$sth->execute($bind);
@@ -49,7 +49,7 @@ if (!function_exists("isVoted"))
 
 		if (Flux::config('EnableIPVoteCheck'))
 		{
-			$sql = "SELECT timestamp_expire FROM $server->loginDatabase.$vfp_logs WHERE ipaddress = ? AND sites_id = ? AND UNIX_TIMESTAMP(timestamp_expire) > ? LIMIT 1";
+			$sql = "SELECT `timestamp_expire` FROM `$server->loginDatabase.$vfp_logs` WHERE `ipaddress` = ? AND `sites_id` = ? AND UNIX_TIMESTAMP(timestamp_expire) > ? LIMIT 1";
 			$sth = $server->connection->getStatement($sql);
 			$bind = array($ipaddress, $vote_id, time());
 			$sth->execute($bind);
@@ -58,7 +58,7 @@ if (!function_exists("isVoted"))
 				return $sth->fetch()->timestamp_expire;
 		}
 
-		$sql = "SELECT timestamp_expire FROM $server->loginDatabase.$vfp_logs WHERE account_id = ? AND sites_id = ? AND UNIX_TIMESTAMP(timestamp_expire) > ? LIMIT 1";
+		$sql = "SELECT `timestamp_expire` FROM `$server->loginDatabase.$vfp_logs` WHERE `account_id` = ? AND `sites_id` = ? AND UNIX_TIMESTAMP(timestamp_expire) > ? LIMIT 1";
 		$sth = $server->connection->getStatement($sql);
 		$bind = array($account_id, $vote_id, time());
 		$sth->execute($bind);
@@ -75,7 +75,7 @@ if (!function_exists("getCashPoints"))
 	function getCashPoints($account_id, $server)
 	{
 		$cp_tbl = Flux::config('FluxTables.cashpoints');
-		$sql = "SELECT value FROM $cp_tbl WHERE account_id = ? AND key = '#CASHPOINTS'";
+		$sql = "SELECT `value` FROM `$cp_tbl` WHERE `account_id` = ? AND `key` = '#CASHPOINTS'";
 		$sth = $server->connection->getStatement($sql);
 		$sth->execute(array((int) $account_id));
 
