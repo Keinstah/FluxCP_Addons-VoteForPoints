@@ -1,24 +1,36 @@
-FluxCP Addon [Vote for Points]
+Vote for Points - A FluxCP Addon
 =====================
 
-## Features
-- Vote Time Interval (Default: 12 hours)
-- Time Left - Count down for the voting site to vote
-- Points (Default: 1) [Credits, Vote Points, Cash Points*New] Vote Points.
-- Add, Delete or Edit Voting Site
-- List of all voting site.
-- Able to upload the image for the voting site or use the Image URL instead.
-- Vote Name to avoid the confusion of the voting site.
-- Able to detect if the user is using proxy.
-- Able to check if the user has already voted by its ip address.
-- (new) Voters Log(Able to delete a voters log.)
-- Able to buy items from NPC Shop in game or redeem reward.
+Incentivize your players to vote for your server through a voting system directly integrated to your FluxCP.
+
+# Features
+1. **Vote Time Interval** - Only allows players to vote every 12 hours for a voting site (Default: 12 hours).
+
+2. **Time Left** - Provides a count down until the voting site can be voted on.
+
+3. **Vote Points** - A selection of either [Credits, Vote Points, Cash Points] as reward for voting. (Default: 1)
+
+4. **Add, Delete or Edit** a voting site.
+
+5. **List** all voting sites.
+
+6. **Voting Site Image** - Able to upload the image for the voting site or use the Image URL instead. Images are required for your voting site.
+
+7. **Vote Name** - A label to avoid the confusion of the voting site.
+
+8. **Proxy Check** - Able to detect if the user is using proxy.
+
+9. **IP Check** - Able to check if the user has already voted by its ip address.
+
+10. **Vote Logging (New)** - Log whenever a player votes. Admin is allowed to delete an entry in the vote log.
+
+11. **Accompanying NPC script** - Able to buy items from an NPC Shop in game or to redeem a reward.
 
 ## Compability
-- Tested on Xantara's FluxCP for rAthena - https://github.com/m...ntara/fluxcp-rA
+Tested on Xantara's FluxCP for rAthena - https://github.com/m...ntara/fluxcp-rA
 
 ## Rules
-- Do not steal the credit of this work.
+Do not steal the credit of this work.
 
 ## Requirements
 - PHP 5.2+
@@ -44,7 +56,7 @@ FluxCP Addon [Vote for Points]
 
 9. Done
 
-## Contacts
+## Bug Reports
 
 If you find a bug, please contact me.
 
