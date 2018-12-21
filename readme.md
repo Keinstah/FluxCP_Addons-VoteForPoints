@@ -1,38 +1,62 @@
-FluxCP Addon [Vote for Points]
+Vote for Points - A FluxCP Addon
 =====================
 
-Features:
-- Vote Time Interval (Default: 12 hours)
-- Time Left - Count down for the voting site to vote
-- Points (Default: 1) [Credits, Vote Points, Cash Points*New] Vote Points.
-- Add, Delete or Edit Voting Site
-- List of all voting site.
-- Able to upload the image for the voting site or use the Image URL instead.
-- Vote Name to avoid the confusion of the voting site.
-- Able to detect if the user is using proxy.
-- Able to check if the user has already voted by its ip address.
-- (new) Voters Log(Able to delete a voters log.)
-- Able to buy items from NPC Shop in game or redeem reward.
+Incentivize your players to vote for your server through a voting system directly integrated to your FluxCP.
 
-Compability:
-- Tested on Xantara's FluxCP for rAthena - https://github.com/m...ntara/fluxcp-rA
+# Features
+1. **Vote Time Interval** - Only allows players to vote every 12 hours for a voting site (Default: 12 hours).
 
-Rules:
-- Do not steal the credit of this work.
+2. **Time Left** - Provides a count down until the voting site can be voted on.
 
-How to Install:
-- Create a folder named voteforpoints in your addons folder.
-- Extract all the files in voteforpoints folder.
-- Import the sql files from schemas/logindb folder.
-- Create a folder named votes or whatever name you use in the configuration and the path must for the folder be in /themes/default/img/
-- Copy the file voteforpoints.txt from npc folder and paste it to your yourRAserver/npc/custom/
-- Edit the file scripts_custom.conf and add the line npc: npc/custom/voteforpoints.txt
-- Change the settings in voteforpoints to your liking.
-- Done.
+3. **Vote Points** - A selection of either [Credits, Vote Points, Cash Points] as reward for voting. (Default: 1)
 
-Required:
+4. **Add, Delete or Edit** a voting site.
+
+5. **List** all voting sites.
+
+6. **Voting Site Image** - Able to upload the image for the voting site or use the Image URL instead. Images are required for your voting site.
+
+7. **Vote Name** - A label to avoid the confusion of the voting site.
+
+8. **Proxy Check** - Able to detect if the user is using proxy.
+
+9. **IP Check** - Able to check if the user has already voted by its ip address.
+
+10. **Vote Logging (New)** - Log whenever a player votes. Admin is allowed to delete an entry in the vote log.
+
+11. **Accompanying NPC script** - Able to buy items from an NPC Shop in game or to redeem a reward.
+
+## Compability
+Tested on Xantara's FluxCP for rAthena - https://github.com/m...ntara/fluxcp-rA
+
+## Rules
+Do not steal the credit of this work.
+
+## Requirements
 - PHP 5.2+
 - MySql
+
+# Installation
+
+1. Create a folder named `voteforpoints` in your `flux_root_folder/addons` folder.
+
+2. Download this addon and extract all the files into the `voteforpoints` folder.
+
+3. Import the sql files from `schemas/logindb` folder.
+
+4. Create a folder in `flux_root_folder/themes/default/img/votes/` or replace `votes` with whichever name you use in the configuration.
+
+5. Give permissions to the `flux_root_folder/themes/default/img/votes/` folder so that your flux website can upload images. You can do this by using the terminal, going to the `flux_root_folder/themes/default/img/` directory and typing `chmod 777 votes`.
+
+6. Copy the file `voteforpoints.txt` from npc folder and paste it to your `rAthena_root_folder/npc/custom/`
+
+7. Edit the file `scripts_custom.conf` and add the line `npc: npc/custom/voteforpoints.txt`
+
+8. Change the settings in `voteforpoints` to your liking.
+
+9. Done
+
+## Bug Reports
 
 If you find a bug, please contact me.
 
